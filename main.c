@@ -25,6 +25,7 @@ int main()
     printf("\tEjercicio_2\n");
     printf("\tEjercicio_3\n");
     printf("\tEjercicio_4\n");
+    printf("\tEjercicio_5\n");
 
     scanf("%i",&opcion);
 
@@ -145,7 +146,8 @@ int main()
             apilar(&aux1,desapilar(&origen));
         }
 
-        while (!pilavacia(&aux1)){
+        while (!pilavacia(&aux1))
+        {
             apilar(&destino,desapilar(&aux1));
         }
         printf("*************************************************\n");
@@ -154,8 +156,41 @@ int main()
 
         printf("DESTINO\n");
         mostrar(&destino);
-        break;
 
+        break;
+    case 5:
+        do
+        {
+            printf("Ingrese un valor ");
+            scanf("%i",&valor);
+            apilar(&origen,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+
+        printf("ORIGEN\n");
+        mostrar(&origen);
+
+        while(!pilavacia(&origen))
+        {
+            apilar(&aux1,desapilar(&origen));
+        }
+
+        while(!pilavacia(&aux1))
+        {
+            apilar(&aux2,desapilar(&aux1));
+        }
+
+        while (!pilavacia(&aux2))
+        {
+            apilar(&origen,desapilar(&aux2));
+        }
+        printf("*************************************************\n");
+        printf("ORIGEN\n");
+        mostrar(&origen);
+        break;
     }
 
 
