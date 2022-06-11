@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1490112217 source:c:\users\agust\documents\utn tecnicatura\1er cuatrimestre\programacion y laboratorio 1\preparacion final lab_i\guias practicas lab_i\pilas\pila.c
+	"pila.h"
+
+1490112217 c:\users\agust\documents\utn tecnicatura\1er cuatrimestre\programacion y laboratorio 1\preparacion final lab_i\guias practicas lab_i\pilas\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1654966974 source:c:\users\agust\documents\utn tecnicatura\1er cuatrimestre\programacion y laboratorio 1\preparacion final lab_i\guias practicas lab_i\pilas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	"pila.h"
+
