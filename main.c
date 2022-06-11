@@ -13,6 +13,7 @@ int main()
     Pila distintos;
     int valor=0;
     int opcion=0;
+    int aux;
     char salir;
     inicpila(&pilita);
     inicpila(&aux1);
@@ -26,6 +27,8 @@ int main()
     printf("\tEjercicio_3\n");
     printf("\tEjercicio_4\n");
     printf("\tEjercicio_5\n");
+    printf("\tEjercicio_6\n");
+    printf("\tEjercicio_7\n");
 
     scanf("%i",&opcion);
 
@@ -188,6 +191,72 @@ int main()
             apilar(&origen,desapilar(&aux2));
         }
         printf("*************************************************\n");
+        printf("ORIGEN\n");
+        mostrar(&origen);
+        break;
+    case 6:
+        do
+        {
+            printf("Ingrese un valor ");
+            scanf("%i",&valor);
+            apilar(&origen,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+        printf("ORIGEN\n");
+        mostrar(&origen);
+
+        if (!pilavacia(&origen))
+        {
+            aux=desapilar(&origen);
+        }
+
+        while(!pilavacia(&origen))
+        {
+            apilar(&aux1,desapilar(&origen));
+        }
+
+        apilar(&origen,aux);
+
+        while (!pilavacia(&aux1))
+        {
+            apilar(&origen,desapilar(&aux1));
+        }
+        printf("ORIGEN\n");
+        mostrar(&origen);
+        break;
+    case 7:
+        do
+        {
+            printf("Ingrese un valor ");
+            scanf("%i",&valor);
+            apilar(&origen,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+        printf("ORIGEN\n");
+        mostrar(&origen);
+
+        while(!pilavacia(&origen))
+        {
+            apilar(&aux1,desapilar(&origen));
+        }
+
+        if (!pilavacia(&aux1))
+        {
+            aux=desapilar(&aux1);
+        }
+
+        while (!pilavacia(&aux1))
+        {
+            apilar(&origen,desapilar(&aux1));
+        }
+        apilar(&origen,aux);
+
         printf("ORIGEN\n");
         mostrar(&origen);
         break;
