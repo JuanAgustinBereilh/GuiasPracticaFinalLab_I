@@ -11,16 +11,24 @@ int main()
     Pila pilita, aux1, aux2;
     Pila origen, destino;
     Pila distintos;
+    Pila mazo,jugador1,jugador2;
+    Pila a,b;
     int valor=0;
     int opcion=0;
     int aux;
     char salir;
+    int flag=0;
     inicpila(&pilita);
     inicpila(&aux1);
     inicpila(&aux2);
     inicpila(&origen);
     inicpila(&destino);
     inicpila(&distintos);
+    inicpila(&mazo);
+    inicpila(&jugador1);
+    inicpila(&jugador2);
+    inicpila(&a);
+    inicpila(&b);
 
     printf("\tEjercicio_1\n");
     printf("\tEjercicio_2\n");
@@ -29,6 +37,7 @@ int main()
     printf("\tEjercicio_5\n");
     printf("\tEjercicio_6\n");
     printf("\tEjercicio_7\n");
+    printf("\tEjercicio_8\n");
 
     scanf("%i",&opcion);
 
@@ -259,6 +268,129 @@ int main()
 
         printf("ORIGEN\n");
         mostrar(&origen);
+        break;
+    case 8:
+        for (int i=0; i<40; i++)
+        {
+            apilar(&mazo,i+1);
+        }
+        printf("Mazo: \n");
+        mostrar(&mazo);
+        while (!pilavacia(&mazo))
+        {
+            apilar(&jugador1,desapilar(&mazo));
+            if (!pilavacia(&mazo))
+            {
+                apilar(&jugador2,desapilar(&mazo));
+            }
+        }
+        printf("Mazo: \n");
+        mostrar(&mazo);
+        printf("Jugador1: \n");
+        mostrar(&jugador1);
+        printf("Jugador2: \n");
+        mostrar(&jugador2);
+        break;
+    case 9:
+        do
+        {
+            printf("Ingrese un valor a la Pila A \n");
+            scanf("%i",&valor);
+            apilar(&a,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+        do
+        {
+            printf("Ingrese un valor a la Pila B \n");
+            scanf("%i",&valor);
+            apilar(&b,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+        printf("Pila A: \n");
+        mostrar(&a);
+        printf("Pila B: \n");
+        mostrar(&b);
+        while (!pilavacia(&a)&&!pilavacia(&b))
+        {
+            apilar(&aux,desapilar(&a));
+            apilar(&aux,desapilar(&b));
+        }
+
+        if (pilavacia(&a)&&pilavacia(&b))
+        {
+            printf("La pila A y la pila B tienen la misma cantidad de elementos.\n");
+        }
+        else if (pilavacia(&a))
+        {
+            printf("La pila B es mas grande que la pila A. \n");
+        }
+        else
+        {
+            printf("La pila A es mas grande que la pila B. \n");
+
+        }
+        break;
+    case 10:
+        do
+        {
+            printf("Ingrese un valor a la Pila A \n");
+            scanf("%i",&valor);
+            apilar(&a,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+        do
+        {
+            printf("Ingrese un valor a la Pila B \n");
+            scanf("%i",&valor);
+            apilar(&b,valor);
+            fflush(stdin);
+            printf("Para salir presione la tecla ESC\n");
+            salir=getch();
+        }
+        while(salir!=27);
+        printf("Pila A: \n");
+        mostrar(&a);
+        printf("Pila B: \n");
+        mostrar(&b);
+        while (!pilavacia(&a)&&!pilavacia(&b)&&flag==0)
+        {
+            if (tope(&a)==tope(&b))
+            {
+                apilar(&aux,desapilar(&a));
+                apilar(&aux,desapilar(&b));
+            }
+            else
+            {
+                flag=1;
+            }
+        }
+
+        if (pilavacia(&a)&&pilavacia(&b))
+        {
+            printf("La pila A y la pila B tienen la misma cantidad de elementos, y sus elementos son identicos.\n");
+        }
+        else if (pilavacia(&a))
+        {
+            printf("La pila B es mas grande que la pila A. \n");
+        }
+        else if (pilavacia(&b))
+        {
+            printf("La pila A es mas grande que la pila B. \n");
+
+        } else
+        {
+            printf("Las pilas tienen elementos distintos")
+        }
+
         break;
     }
 
