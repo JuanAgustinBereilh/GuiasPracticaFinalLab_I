@@ -13,11 +13,15 @@ int main()
     Pila distintos;
     Pila mazo,jugador1,jugador2;
     Pila a,b;
+    Pila menor;
     int valor=0;
     int opcion=0;
     int aux;
     char salir;
     int flag=0;
+    int suma=0;
+    int cantidad=0;
+    float promedio;
     inicpila(&pilita);
     inicpila(&aux1);
     inicpila(&aux2);
@@ -29,16 +33,13 @@ int main()
     inicpila(&jugador2);
     inicpila(&a);
     inicpila(&b);
+    inicpila(&menor);
+    for (int i=1; i<22; i++)
+    {
+        printf("\tEjercicio_%i\n",i);
+    }
 
-    printf("\tEjercicio_1\n");
-    printf("\tEjercicio_2\n");
-    printf("\tEjercicio_3\n");
-    printf("\tEjercicio_4\n");
-    printf("\tEjercicio_5\n");
-    printf("\tEjercicio_6\n");
-    printf("\tEjercicio_7\n");
-    printf("\tEjercicio_8\n");
-
+    srand(time(NULL));
     scanf("%i",&opcion);
 
     switch(opcion)
@@ -318,8 +319,8 @@ int main()
         mostrar(&b);
         while (!pilavacia(&a)&&!pilavacia(&b))
         {
-            apilar(&aux,desapilar(&a));
-            apilar(&aux,desapilar(&b));
+            apilar(&aux1,desapilar(&a));
+            apilar(&aux1,desapilar(&b));
         }
 
         if (pilavacia(&a)&&pilavacia(&b))
@@ -333,7 +334,6 @@ int main()
         else
         {
             printf("La pila A es mas grande que la pila B. \n");
-
         }
         break;
     case 10:
@@ -361,40 +361,135 @@ int main()
         mostrar(&a);
         printf("Pila B: \n");
         mostrar(&b);
-        while (!pilavacia(&a)&&!pilavacia(&b)&&flag==0)
+        while (!pilavacia(&a)&&!pilavacia(&b))
         {
-            if (tope(&a)==tope(&b))
-            {
-                apilar(&aux,desapilar(&a));
-                apilar(&aux,desapilar(&b));
-            }
-            else
+            if (tope(&a)!=tope(&b))
             {
                 flag=1;
             }
+            apilar(&aux1,desapilar(&a));
+            apilar(&aux1,desapilar(&b));
         }
-
         if (pilavacia(&a)&&pilavacia(&b))
         {
-            printf("La pila A y la pila B tienen la misma cantidad de elementos, y sus elementos son identicos.\n");
+            if (flag==0)
+            {
+                printf("La pila A y la pila B tienen la misma cantidad de elementos, y sus elementos son identicos.\n");
+            }
+            else
+            {
+                printf("La pila A y la pila B tienen la misma cantidad de elementos, pero sus elementos son distintos.\n");
+            }
         }
         else if (pilavacia(&a))
         {
             printf("La pila B es mas grande que la pila A. \n");
         }
-        else if (pilavacia(&b))
+        else
         {
             printf("La pila A es mas grande que la pila B. \n");
-
-        } else
-        {
-            printf("Las pilas tienen elementos distintos")
         }
+        break;
+    case 11:
+        //11. Suponiendo la existencia de una pila MODELO que no esté vacía, eliminar de la pila DADA todos los
+        //elementos que sean iguales al tope de la pila MODELO.
+        break;
+    case 12:
+        //12. Suponiendo la existencia de una pila MODELO (vacía o no), eliminar de la pila DADA todos los
+        //elementos que existan en MODELO.
+        break;
+    case 13:
+        //13. Suponiendo la existencia de una pila LÍMITE, pasar los elementos de la pila DADA que sean mayores
+        //o iguales que el tope de LIMITE a la pila MAYORES, y los elementos que sean menores a la pila MENORES.
+        break;
+    case 14:
+        //14. Determinar si la cantidad de elementos de la pila DADA es par. Si es par, pasar el elemento del tope
+        //de la pila AUX a la pila PAR y si es impar pasar el tope a la pila IMPAR. (NO contar los elementos)
+        break;
+    case 17:
+        //17. Para el ejercicio “Cargar por teclado una pila ORIGEN y pasar a la pila DISTINTO todos aquellos
+        //elementos que preceden al valor 5 (elementos entre el tope y el valor 5). No se asegura que exista algún valor 5”
+        break;
+    case 18://ej1 pilas avanzadas
+        for(int i=0; i<15; i++)
+        {
+
+            apilar(&pilita,rand()%13+1);
+        }
+        mostrar(&pilita);
+        while(!pilavacia(&pilita))
+        {
+            suma=suma+tope(&pilita);
+            apilar(&aux1,desapilar(&pilita));
+        }
+        printf("Suma: %i",suma);
+        mostrar(&pilita);
+        break;
+    case 19://ej2 pilas avanzadas
+        for(int i=0; i<20; i++)
+        {
+            apilar(&pilita,rand()%13+1);
+        }
+        mostrar(&pilita);
+        while(!pilavacia(&pilita))
+        {
+            cantidad++;
+            apilar(&aux1,desapilar(&pilita));
+        }
+        printf("Camtidad de elementos: %i",cantidad);
+        mostrar(&pilita);
+        break;
+    case 20://ej3 pilas avanzadas
+        for(int i=0; i<30; i++)
+        {
+            apilar(&pilita,rand()%13+1);
+        }
+        mostrar(&pilita);
+        while(!pilavacia(&pilita))
+        {
+            suma=suma+tope(&pilita);
+            cantidad++;
+            apilar(&aux1,desapilar(&pilita));
+        }
+        promedio=(float) suma/cantidad;
+        if (cantidad!=0)
+        {
+            printf("Suma: %i\n",suma);
+            printf("Cantidad de elementos: %i\n",cantidad);
+            printf("El promedio de los valores de la pila es: %0.2f",promedio);
+            mostrar(&pilita);
+        }
+        break;
+    case 21://ej4 pilas avanzadas
+        for(int i=0; i<10; i++)
+        {
+            apilar(&pilita,rand()%99+1);
+        }
+        mostrar(&pilita);
+
+        if (!pilavacia(&pilita))
+        {
+            apilar(&menor,tope(&pilita));
+            while(!pilavacia(&pilita))
+            {
+                if (tope(&menor)>tope(&pilita))
+                {
+                    apilar(&menor,tope(&pilita));
+                }
+                apilar(&aux1,desapilar(&pilita));
+            }
+        }
+        printf("El menor valor de la pila es: %i",tope(&menor));
+        while(!pilavacia(&aux1))
+        {
+            apilar(&pilita,desapilar(&aux1));
+        }
+        mostrar(&pilita);
+        break;
+    case 22://ej5 pilas avanzadas
 
         break;
     }
-
-
     return 0;
 }
 
