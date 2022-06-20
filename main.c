@@ -12,11 +12,12 @@ int main()
     Pila origen, destino;
     Pila distintos;
     Pila mazo,jugador1,jugador2;
-    Pila a,b;
+    Pila a,b,c;
     Pila menor;
     int valor=0;
     int opcion=0;
     int aux;
+    int eliminado;
     char salir;
     int flag=0;
     int suma=0;
@@ -33,10 +34,11 @@ int main()
     inicpila(&jugador2);
     inicpila(&a);
     inicpila(&b);
+    inicpila(&c);
     inicpila(&menor);
-    for (int i=1; i<22; i++)
+    for (int i=1; i<31; i++)
     {
-        printf("\tEjercicio_%i\n",i);
+        printf(" Ejercicio_%i\n",i);
     }
 
     srand(time(NULL));
@@ -487,8 +489,311 @@ int main()
         mostrar(&pilita);
         break;
     case 22://ej5 pilas avanzadas
+        for (int i=0; i<6; i++)
+        {
+            leer(&pilita);
+        }
+        mostrar(&pilita);
+        printf("Ingrese un valor a la pila.\n");
+        leer(&aux1);
+        if (!pilavacia(&pilita))
+        {
+            while (flag==0)
+            {
+                if (tope(&aux1)<tope(&pilita))
+                {
+                    apilar(&pilita,desapilar(&aux1));
+                    flag=1;
+                }
+                else
+                {
+                    apilar(&aux2,desapilar(&pilita));
+                }
+            }
+            while(!pilavacia(&aux2))
+            {
+                apilar(&pilita,desapilar(&aux2));
+            }
+        }
+        else
+        {
+            apilar(&pilita,desapilar(&aux1));
+        }
+        mostrar(&pilita);
+        break;
+    case 23: //ej6 pilas avanzadas (Metodo de ordenamiento por seleccion.)
+        /*for (int i=0; i<6; i++)
+        {
+            leer(&pilita);
+        }*/
+        for(int i=0; i<10; i++)
+        {
+            apilar(&pilita,rand()%99+1);
+        }
+        printf("Pilita:\n");
+        mostrar(&pilita);
+
+        while (!pilavacia(&pilita))
+        {
+            apilar(&menor,desapilar(&pilita));
+            while (!pilavacia(&pilita))
+            {
+                if (tope(&pilita)<tope(&menor))
+                {
+                    apilar(&aux1,desapilar(&menor));
+                    apilar(&menor,desapilar(&pilita));
+                }
+                else
+                {
+                    apilar(&aux1,desapilar(&pilita));
+                }
+            }
+            while(!pilavacia(&aux1))
+            {
+                apilar(&pilita,desapilar(&aux1));
+            }
+        }
+
+        printf("Ordenada:\n");
+        mostrar(&menor);
+        break;
+    case 24: //ej7 pilas avanzadas
+        for (int i=0; i<6; i++)
+        {
+            leer(&pilita);
+        }
+        printf("Pilita:\n");
+        mostrar(&pilita);
+
+        if (!pilavacia(&pilita))
+        {
+            printf("Ingrese un valor a buscar.\n");
+            scanf("%i",&valor);
+            while (!pilavacia(&pilita)&&flag==0)
+            {
+                if (tope(&pilita)==valor)
+                {
+                    flag=1;
+                }
+                else
+                {
+                    apilar(&aux1,desapilar(&pilita));
+                }
+            }
+            if (flag==1)
+            {
+                printf("El valor buscado %i se encuentra en la pila.",valor);
+            }
+            else
+            {
+                printf("El valor buscado %i no se encuentra en la pila.",valor);
+            }
+        }
+        break;
+    case 25: //ej8 pilas avanzadas
+        for(int i=0; i<10; i++)
+        {
+            apilar(&pilita,rand()%99+1);
+        }
+        printf("Pilita:\n");
+        mostrar(&pilita);
+
+        if (!pilavacia(&pilita))
+        {
+            printf("Ingrese un valor a buscar.\n");
+            scanf("%i",&valor);
+            while (!pilavacia(&pilita)&&flag==0)
+            {
+                if (tope(&pilita)==valor)
+                {
+                    eliminado=desapilar(&pilita);
+                    flag=1;
+                }
+                else
+                {
+                    apilar(&aux1,desapilar(&pilita));
+                }
+            }
+            while(!pilavacia(&aux1))
+            {
+
+                apilar(&pilita,desapilar(&aux1));
+            }
+        }
+        mostrar(&pilita);
+        if (flag==1)
+        {
+            printf("Valor eliminado %i",eliminado);
+        }
+        else
+        {
+            printf("No se encontro ninguna coincidencia.");
+        }
+        break;
+    case 26: //ej9 pilas avanzadas -- Pila Capicua
+        for (int i=0; i<7; i++)
+        {
+            leer(&pilita);
+        }
+        /*for(int i=0; i<10; i++)
+        {
+            apilar(&pilita,rand()%99+1);
+        }*/
+        printf("Pilita:\n");
+        mostrar(&pilita);
+        //genero una copia de la pila pero invertida, para poder comparar base con tope.
+        if (!pilavacia(&pilita))
+        {
+            while (!pilavacia(&pilita))
+            {
+                apilar(&aux1,tope(&pilita));
+                apilar(&aux2,desapilar(&pilita));
+            }
+            while(!pilavacia(&aux2))
+            {
+                apilar(&pilita,desapilar(&aux2));
+            }
+        }
+
+        mostrar(&aux1);
+        mostrar(&pilita);
+        while (flag==0&&!pilavacia(&pilita)&&!pilavacia(&aux1))
+        {
+            if (tope(&pilita)!=tope(&aux1))
+            {
+                flag=1;
+            }
+            apilar(&aux2,desapilar(&pilita));
+            apilar(&aux2,desapilar(&aux1));
+        }
+
+        if (flag==1)
+        {
+            printf("La pila no es capicua.");
+        }
+        else
+        {
+            printf("La pila es capicua.");
+        }
+        break;
+    case 27: //ej10 pilas avanzadas
+        apilar(&a,1);
+        apilar(&a,2);
+        apilar(&a,3);
+        apilar(&b,2);
+        apilar(&b,3);
+        apilar(&b,5);
+        apilar(&b,7);
+        printf("a:\n");
+        mostrar(&a);
+        printf("b:\n");
+        mostrar(&b);
+        while(!pilavacia(&a))
+        {
+            apilar(&c,desapilar(&a));
+        }
+        while(!pilavacia(&b))
+        {
+            flag=0;
+            while(!pilavacia(&c)&&flag==0)
+            {
+                if (tope(&b)==tope(&c))
+                {
+                    flag=1;
+                }
+                apilar(&aux1,desapilar(&c));
+            }
+            while (!pilavacia(&aux1))
+            {
+                apilar(&c,desapilar(&aux1));
+            }
+            if(flag==0)
+            {
+                apilar(&c,desapilar(&b));
+            }
+            else
+            {
+                apilar(&aux2,desapilar(&b));
+            }
+        }
+        printf("c:\n");
+        mostrar(&c);
+        break;
+    case 28: //ej11 pilas avanzadas
+        apilar(&a,1);
+        apilar(&a,3);
+        apilar(&a,7);
+        apilar(&a,13);
+        apilar(&a,14);
+        apilar(&a,23);
+        printf("Ordenada 1:");
+        mostrar(&a);
+        apilar(&b,5);
+        apilar(&b,9);
+        apilar(&b,13);
+        apilar(&b,20);
+        apilar(&b,35);
+        printf("Ordenada 2:");
+        mostrar(&b);
+        while(!pilavacia(&a)&&!pilavacia(&b))
+        {
+            if (tope(&b)>tope(&a))
+            {
+                apilar(&aux1,desapilar(&b));
+            }
+            else
+            {
+                apilar(&aux1,desapilar(&a));
+            }
+        }
+        while(!pilavacia(&a))
+        {
+            apilar(&aux1,desapilar(&a));
+        }
+        while(!pilavacia(&b))
+        {
+            apilar(&aux1,desapilar(&b));
+        }
+        while(!pilavacia(&aux1))
+        {
+            apilar(&c,desapilar(&aux1));
+        }
+        printf("OrdenadaFnnal:");
+        mostrar(&c);
+        break;
+    case 29: //ej12 pilas avanzadas - Metodo de Ordenamiento por Insercion
+        for (int i=0;i<10;i++){
+            apilar(&pilita,rand()%99+1);
+        }
+        printf("Pila Original:");
+        mostrar(&pilita);
+        apilar(&aux1,desapilar(&pilita));
+        while (!pilavacia(&pilita))
+        {
+            while(!pilavacia(&aux1)&&tope(&aux1)<tope(&pilita))
+            {
+                apilar(&aux2,desapilar(&aux1));
+            }
+            apilar(&aux1,desapilar(&pilita));
+            while(!pilavacia(&aux2))
+            {
+                apilar(&aux1,desapilar(&aux2));
+            }
+        }
+        printf("Pila Ordenada:");
+        mostrar(&aux1);
+        break;
+    case 30: //ej13 pilas avanzadas
+        /*13. Suponer un juego de cartas en el que en cada mano se reparten dos cartas por jugador. Un
+        jugador gana la mano cuando la suma de sus cartas es mayor que las del contrario y al hacerlo
+        coloca todas las cartas (las de él y las de su rival) en su pila de puntos. En caso de empate
+        (y para simplificar) siempre gana el jugador1. Simular la ejecución del juego de tal manera que
+        dada una pila MAZO (con un número de elementos múltiplo de cuatro) distribuya las cartas en las
+        pilas PUNTOSJUG1 y PUNTOSJUG2 como si estos hubieran jugado. Utilizar las pilas auxiliares que crea
+        conveniente*/
 
         break;
+
     }
     return 0;
 }
